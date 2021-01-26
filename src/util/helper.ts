@@ -54,6 +54,10 @@ export const randomListing = (userID: string): Listing => {
   };
 };
 
+export const randomUUID = (): string => {
+  return faker.random.uuid();
+};
+
 export const insertQueryGenerator = (params: object): string => {
   const PARAMS = Object.entries(params).map((n) => n[0]);
   const VALUES = Array(PARAMS.length)

@@ -6,7 +6,8 @@ import { Pool } from "pg";
 import config from "./util/config";
 import logger from "./util/logger";
 
-import testRoutes from "./routes/testRoutes";
+import userRoutes from "./routes/userRoutes";
+import listingRoutes from "./routes/listingRoutes";
 
 const app = express();
 const client = new Client({ node: config.es.ELASTIC_SEARCH });
@@ -30,7 +31,8 @@ app.get("/", (req, res) => {
 });
 
 /** Routes */
-app.use("/api", testRoutes);
+app.use("/api", userRoutes);
+app.use("/api", listingRoutes);
 
 /** 404 Routes */
 app.use((req, res) => {
