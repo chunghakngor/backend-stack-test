@@ -39,6 +39,18 @@ export const getListing = async () => {
     await client.connect();
     const database = client.db(config.db.MONGODB.database);
     const collection = database.collection("listings");
+    // const cursor = collection
+    //   .aggregate([
+    //     {
+    //       $sort: {
+    //         postedAt: -1,
+    //       },
+    //     },
+    //     {
+    //       $limit: 20,
+    //     },
+    //   ])
+    //   .toArray();
     const cursor = await collection.find({}).sort({ postedAt: -1 }).limit(20).toArray();
     return cursor;
   } catch (err) {
@@ -52,6 +64,23 @@ export const searchQuery = async (query: object) => {
     await client.connect();
     const database = client.db(config.db.MONGODB.database);
     const collection = database.collection("listings");
+    // const cursor = await collection
+    //   .aggregate([
+    //     {
+    //       $match: {
+    //         category: "Computers",
+    //       },
+    //     },
+    //     {
+    //       $sort: {
+    //         postedAt: -1,
+    //       },
+    //     },
+    //     {
+    //       $limit: 20,
+    //     },
+    //   ])
+    //   .toArray();
     const cursor = await collection.find(query).limit(20).toArray();
     return cursor;
   } catch (err) {

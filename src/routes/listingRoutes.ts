@@ -1,5 +1,5 @@
 import express from "express";
-import { createListing, createManyListing, getListing, searchQuery } from "../actions/listingActions";
+import { createListing, getListing, searchQuery } from "../actions/listingActions";
 
 import { Listing, randomListing, randomUUID } from "../util/helper";
 

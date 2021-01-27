@@ -30,3 +30,7 @@
 ### Tests
 - [x] GET with 1,000,000 listing = 250ms
 - [x] FIND with 1,000,000 listing = 20-25ms
+- [x] FIND with 3,500,000 listing = 30ms
+- [x] GET with 3,500,000 listing = 800ms
+- [x] AGGREGATE LASTEST with 3,500,000 listing = 900-1000ms
+- [x] AGGREGATE with 3,500,000 listing = 1000ms (much slower than using find)

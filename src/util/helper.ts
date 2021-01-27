@@ -8,7 +8,7 @@ export interface User {
   username: string;
   email: string;
   total_listings?: number;
-  listings?: Listing[];
+  listings?: string[];
   created: Date;
 }
 
@@ -44,8 +44,8 @@ export const randomUser = (): User => {
 
 export const randomListing = (userID: string): Listing => {
   return {
-    _id: faker.random.uuid(),
     userID,
+    _id: faker.random.uuid(),
     title: faker.commerce.product(),
     price: faker.commerce.price(),
     category: faker.commerce.department(),
