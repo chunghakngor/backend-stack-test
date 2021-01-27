@@ -1,5 +1,12 @@
 import faker from "faker";
 
+export const generateRandomSecret = (amount: number): string => {
+  return Array(5)
+    .fill(0)
+    .map((_) => Math.random().toString(36).substring(7))
+    .join("");
+};
+
 export interface User {
   _id: string;
   title?: string;

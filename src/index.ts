@@ -1,20 +1,20 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { Client } from "@elastic/elasticsearch";
-import { Pool } from "pg";
+import { auth } from "express-openid-connect";
 
 import config from "./util/config";
 import logger from "./util/logger";
 
 import userRoutes from "./routes/userRoutes";
 import listingRoutes from "./routes/listingRoutes";
+import authRoutes, { authConfig } from "./routes/authRoutes";
 
 const app = express();
-const client = new Client({ node: config.es.ELASTIC_SEARCH });
-const pool = new Pool(config.db.POSTGRES_DB);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(auth(authConfig));
 
 /** Logger */
 app.use((req, res, next) => {
@@ -33,6 +33,7 @@ app.get("/", (req, res) => {
 /** Routes */
 app.use("/api", userRoutes);
 app.use("/api", listingRoutes);
+app.use(authRoutes);
 
 /** 404 Routes */
 app.use((req, res) => {

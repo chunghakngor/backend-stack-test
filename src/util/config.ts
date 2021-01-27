@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import { generateRandomSecret } from "./helper";
 dotenv.config();
 
 const SERVER_HOSTNAME: string = process.env.SERVER_HOSTNAME || "localhost";
@@ -15,6 +16,13 @@ const POSTGRES_DB_PORT: number = Number(String(process.env.POSTGRES_DB_PORT)) ||
 const POSTGRES_DB_DATABASE: string = process.env.POSTGRES_DB_DATABASE || "postgres";
 const POSTGRES_DB_USER: string = process.env.POSTGRES_DB_USER || "postgres";
 const PROGRESS_DB_PASSWORD: string = process.env.POSTGRES_DB_PASSWORD || "123456";
+
+const AUTH0_CLIENTID: string = process.env.AUTH0_CLIENTID || "u24LSCqISaC9gULZh3WhkMoxXfECFVHu";
+const AUTH0_SECRET: string = process.env.AUTH0_SECRET || generateRandomSecret(30);
+
+const AUTH0_AUDIENCE: string = process.env.AUTH0_AUDIENCE || "";
+const AUTH0_ISSUER: string = process.env.AUTH0_ISSUER || "";
+const AUTH0_DOMAIN: string = process.env.AUTH0_DOMAIN || "";
 
 const ELASTIC_SEARCH: string = process.env.ELASTIC_SEARCH || "http://localhost:9200";
 const ELASTIC_USERNAME: string | undefined = process.env.ELASTIC_USERNAME;
@@ -39,6 +47,15 @@ export default {
       username: MONGODB_USERNAME,
       password: MONGODB_PASSWORD,
       database: MONGODB_DATABASE,
+    },
+  },
+  auth: {
+    auth0: {
+      audience: AUTH0_AUDIENCE,
+      issuer: AUTH0_ISSUER,
+      domain: AUTH0_DOMAIN,
+      clientID: AUTH0_CLIENTID,
+      secret: AUTH0_SECRET,
     },
   },
   es: {
