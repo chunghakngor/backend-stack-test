@@ -7,7 +7,8 @@
     "start": "npm run build && node build/index.js",
     "dev": "nodemon src/index.ts",
     "build": "rm -rf build && tsc",
-    "docker": "docker-compose up -d"
+    "docker": "docker-compose up -d",
+    "seed": "ts-node src/util/seeding.ts"
   },
   "author": "",
   "license": "ISC",

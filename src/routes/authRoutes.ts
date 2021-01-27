@@ -14,11 +14,13 @@ export const authConfig = {
 };
 
 router.get("/auth", (req: any, res) => {
-  res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
+  res.status(200).json({
+    status: req.oidc.isAuthenticated(),
+  });
 });
 
 router.get("/auth/profile", requiresAuth(), (req: any, res) => {
-  res.send(JSON.stringify(req.oidc.user));
+  res.status(200).json(req.oidc.user);
 });
 
 export default router;

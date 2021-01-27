@@ -2,8 +2,8 @@ import config from "../util/config";
 import { MongoClient } from "mongodb";
 import { randomUser, User } from "../util/helper";
 
-const uri = `mongodb://${config.db.MONGODB.username}:${config.db.MONGODB.password}@${config.db.MONGODB.host}:${config.db.MONGODB.port}?retryWrites=true&w=majority`;
-
+// const uri = `mongodb://${config.db.MONGODB.username}:${config.db.MONGODB.password}@${config.db.MONGODB.host}:${config.db.MONGODB.port}?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${config.db.MONGODB.username}:${config.db.MONGODB.password}@test.zid96.mongodb.net/db?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 export const createUser = async (data: User) => {

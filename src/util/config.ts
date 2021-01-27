@@ -7,8 +7,8 @@ const SERVER_PORT: number = Number(String(process.env.SERVER_PORT)) || 4000;
 
 const MONGODB_HOST: string = process.env.MONGODB_HOST || "localhost";
 const MONGODB_PORT: number = Number(String(process.env.MONGODB_PORT)) || 27017;
-const MONGODB_USERNAME: string = process.env.MONGODB_USERNAME || "root";
-const MONGODB_PASSWORD: string = process.env.MONGODB_PASSWORD || "password";
+const MONGODB_USERNAME: string | undefined = process.env.MONGODB_USERNAME;
+const MONGODB_PASSWORD: string | undefined = process.env.MONGODB_PASSWORD;
 const MONGODB_DATABASE: string = process.env.MONGODB_DATABASE || "db";
 
 const POSTGRES_DB_HOST: string = process.env.POSTGRES_DB_HOST || "localhost";

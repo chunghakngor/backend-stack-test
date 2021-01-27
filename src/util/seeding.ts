@@ -4,7 +4,9 @@ import { MongoClient } from "mongodb";
 import { Client } from "@elastic/elasticsearch";
 import { Listing, randomListing, randomUUID, User } from "./helper";
 
-const uri = `mongodb://${config.db.MONGODB.username}:${config.db.MONGODB.password}@${config.db.MONGODB.host}:${config.db.MONGODB.port}?retryWrites=true&w=majority`;
+//const uri = `mongodb://${config.db.MONGODB.username}:${config.db.MONGODB.password}@${config.db.MONGODB.host}:${config.db.MONGODB.port}?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${config.db.MONGODB.username}:${config.db.MONGODB.password}@test.zid96.mongodb.net/db?retryWrites=true&w=majority`;
+console.log(`[MONGODB] Connecting to ${uri}`);
 const mongo = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const es = new Client({ node: config.es.ELASTIC_SEARCH });
 
@@ -37,13 +39,14 @@ const createFakeUser = async () => {
 };
 
 const insertManyListing = async (data: Listing[]) => {
+  await mongo.connect();
   try {
     const database = mongo.db(config.db.MONGODB.database);
     await database.collection("listings").insertMany(data, {});
   } catch (error) {
     console.log(error);
   } finally {
-    console.log("[SUCCESS] Successfully Seeded Listings Database");
+    console.log("[MONGODB] Successfully Seeded Listings Database");
   }
 };
 
@@ -54,13 +57,13 @@ const insertManyUsers = async (data: User[]) => {
   } catch (error) {
     console.log(error);
   } finally {
-    await console.log("[SUCCESS] Successfully Seeded Users Database");
+    await mongo.close();
+    console.log("[MONGODB] Successfully Seeded Users Database");
   }
 };
 
 const seedUserDatabase = async () => {
-  await connectDB();
-  const totalSeed = 100000;
+  const totalSeed = 20000;
   const allUsers = await Promise.all(
     Array(totalSeed)
       .fill(0)
@@ -70,18 +73,6 @@ const seedUserDatabase = async () => {
   try {
     await insertManyListing(allDataListing);
     await insertManyUsers(allUsers);
-  } catch (error) {
-    console.log(error);
-  } finally {
-    await mongo.close();
-    console.log("Successfully disconnected to database");
-  }
-};
-
-const connectDB = async () => {
-  try {
-    await mongo.connect();
-    console.log("Successfully connected to database");
   } catch (error) {
     console.log(error);
   }
