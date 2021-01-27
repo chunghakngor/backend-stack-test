@@ -5,19 +5,35 @@
 - `npm run build`: build typescript into javascript
 - `npm run docker`: docker-compose all the docker images
 
-### Current Stack
+## Current Stack
+### Framework Web
   - Node.js
   - Express.js
-  - Elastic Search (Cluster)
-  - Kibana
+
+### Database
   - ~~Postgresql~~
   - ~~Adminer~~
   - MongoDB
   - Mongo Express
+
+### Authentication
+  - Bcrypt, JWT, Passport.js
+  - Firebase Auth
+  - Auth0
+
+### Autocompletion Search
+  - Elastic Search (Cluster)
+
+### Dashboard
+  - Kibana
+
+
+
+### Utils
   - Typescript
   - Docker
 
-### Testing
+## Testing
   - [ ] ~~Postgresql CRUD~~
   - [ ] MongoDB CRUD
   - [x] Docker Compose 
